@@ -36,7 +36,7 @@ export class Scream extends Component {
         commentCount,
       },
     } = this.props;
-    console.log(createdAt);
+
     return (
       <Card className={classes.card}>
         <CardMedia
