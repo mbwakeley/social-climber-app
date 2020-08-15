@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Scream from "../component/Scream";
+import Profile from "../component/Profile";
+
 export class home extends Component {
   state = {
     screams: null,
@@ -32,7 +34,7 @@ export class home extends Component {
           {recentScreamsMarkup}
         </Grid>
         <Grid item sm={4} xs={12}>
-          <p>profile.....</p>
+          <Profile />
         </Grid>
       </Grid>
     );
