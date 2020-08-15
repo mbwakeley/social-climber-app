@@ -71,16 +71,16 @@ class Profile extends Component {
       user: {
         credentials: { handle, createdAt, imageUrl, bio, website, location },
         loading,
+        authenticated,
       },
     } = this.props;
-    const { user: authenticated } = this.props;
 
     let profileMarkup = !loading ? (
       authenticated ? (
         <Paper className={classes.paper}>
           <div className={classes.profile}>
-            <div className="profile-image">
-              <img src={imageUrl} alt="profile" />
+            <div className="image-wrapper">
+              <img src={imageUrl} alt="profile" className="profile-image" />
             </div>
             <hr />
             <div classname="profile-details">
@@ -122,7 +122,7 @@ class Profile extends Component {
           <Typography variant="body2" align="center">
             No profile found, please log in.
           </Typography>
-          <div className="classes.buttons">
+          <div className={classes.buttons}>
             <Button
               variant="contained"
               color="primary"
@@ -135,7 +135,7 @@ class Profile extends Component {
               variant="contained"
               color="secondary"
               component={Link}
-              to="/login"
+              to="/signup"
             >
               Signup
             </Button>
