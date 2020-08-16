@@ -117,7 +117,7 @@ class Profile extends Component {
               </MyButton>
             </div>
             <hr />
-            <div classname="profile-details">
+            <div className="profile-details">
               <MuiLink
                 component={Link}
                 to={`/users/${handle}`}
