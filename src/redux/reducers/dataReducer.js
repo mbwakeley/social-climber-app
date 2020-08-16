@@ -53,6 +53,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
       };
+    // case DELETE_SCREAM:
+    //   return {
+    //     ...state,
+    //     screams: state.screams.filter(
+    //       (scream) => scream.screamId !== action.payload.screamId
+    //     ),
+    //   };
     case POST_SCREAM:
       return {
         ...state,
