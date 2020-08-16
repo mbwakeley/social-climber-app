@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { logoutUser, uploadImage } from "../redux/actions/userActions";
+import EditDetails from "./EditDetails";
 
 //Material UI stuff
 import Paper from "@material-ui/core/Paper";
@@ -19,6 +20,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
+import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 const styles = {
   paper: {
@@ -74,6 +76,10 @@ class Profile extends Component {
     const formData = new FormData();
     formData.append("image", image, image.name);
     this.props.uploadImage(formData);
+  };
+
+  handleLogout = () => {
+    this.props.logoutUser();
   };
 
   handleEditPicture = () => {
@@ -142,6 +148,12 @@ class Profile extends Component {
               <CalendarToday color="primary" />{" "}
               <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
             </div>
+            <Tooltip title="logout" placement="top">
+              <IconButton onClick={this.handleLogout}>
+                <KeyboardReturn color="primary" />
+              </IconButton>
+            </Tooltip>
+            <EditDetails />
           </div>
         </Paper>
       ) : (
