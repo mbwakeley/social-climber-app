@@ -40,7 +40,7 @@ const styles = {
   },
 };
 
-export class login extends Component {
+class login extends Component {
   constructor() {
     super();
     this.state = {
@@ -49,13 +49,11 @@ export class login extends Component {
       errors: {},
     };
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.UI.errors) {
-  //     this.setState({ errors: nextProps.UI.errors });
-  //   }
-  // }
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.Ui.errors) {
+      this.setState({ errors: nextProps.Ui.errors });
+    }
+  }
   handleSubmit = (event) => {
     event.preventDefault();
     const userData = {
@@ -70,14 +68,17 @@ export class login extends Component {
     });
   };
   render() {
-    const { classes } = this.props;
-    const { UI: loading } = this.props;
+    const {
+      classes,
+      Ui: { loading },
+    } = this.props;
     const { errors } = this.state;
+
     return (
       <Grid container className={classes.form}>
         <Grid item sm />
         <Grid item sm>
-          <img src={AppIcon} alt="climber" className={classes.image} />
+          <img src={AppIcon} alt="monkey" className={classes.image} />
           <Typography variant="h2" className={classes.pageTitle}>
             Login
           </Typography>
@@ -125,7 +126,7 @@ export class login extends Component {
             </Button>
             <br />
             <small>
-              Don't have an account? Sign up <Link to="/signup">here</Link>
+              dont have an account ? sign up <Link to="/signup">here</Link>
             </small>
           </form>
         </Grid>
@@ -139,12 +140,12 @@ login.propTypes = {
   classes: PropTypes.object.isRequired,
   loginUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired,
+  Ui: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  UI: state.UI,
+  Ui: state.Ui,
 });
 
 const mapActionsToProps = {

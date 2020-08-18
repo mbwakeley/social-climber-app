@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import MyButton from "../utilities/MyButton";
 //redux
 import { connect } from "react-redux";
-import { postScream } from "../redux/actions/dataActions";
+import { postScream, clearErrors } from "../redux/actions/dataActions";
 
 // Material UI Stuff
 import Button from "@material-ui/core/Button";
@@ -22,14 +22,16 @@ const styles = {
   },
   submitButton: {
     position: "relative",
+    float: "right",
+    marginTop: 10,
   },
   progressSpinner: {
     position: "absolute",
   },
   closeButton: {
     position: "absolute",
-    left: "90%",
-    top: "10%",
+    left: "91%",
+    top: "6%",
   },
 };
 
@@ -41,12 +43,12 @@ class PostScream extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.UI.errors) {
+    if (nextProps.Ui.errors) {
       this.setState({
-        errors: nextProps.UI.errors,
+        errors: nextProps.Ui.errors,
       });
     }
-    if (!nextProps.UI.errors && !nextProps.UI.loading) {
+    if (!nextProps.Ui.errors && !nextProps.Ui.loading) {
       this.setState({ body: "", open: false, errors: {} });
     }
   }
@@ -56,6 +58,7 @@ class PostScream extends Component {
   };
 
   handleClose = () => {
+    this.props.clearErrors();
     this.setState({ open: false });
   };
 
@@ -71,7 +74,10 @@ class PostScream extends Component {
 
   render() {
     const { errors } = this.state;
-    const { classes, loading } = this.props;
+    const {
+      classes,
+      Ui: { loading },
+    } = this.props;
     return (
       <Fragment>
         <MyButton onClick={this.handleOpen} tip="Post a Scream!">
@@ -96,7 +102,7 @@ class PostScream extends Component {
               <TextField
                 name="body"
                 type="text"
-                label="Scream"
+                label="Scream!"
                 multiline
                 rows="3"
                 placeholder="Scream so others can hear you!"
@@ -130,14 +136,15 @@ class PostScream extends Component {
 }
 
 PostScream.propTypes = {
+  clearErrors: PropTypes.func.isRequired,
   postScream: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired,
+  Ui: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  UI: state.UI,
+  Ui: state.Ui,
 });
 
-export default connect(mapStateToProps, { postScream })(
+export default connect(mapStateToProps, { postScream, clearErrors })(
   withStyles(styles)(PostScream)
 );
