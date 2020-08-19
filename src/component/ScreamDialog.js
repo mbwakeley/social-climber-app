@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import MyButton from "../utilities/MyButton";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import LikeButton from "./LikeButton";
 //Material UI Stuff
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -73,10 +74,11 @@ class ScreamDialog extends Component {
       },
       Ui: { loading },
     } = this.props;
-    console.log("loading", loading);
 
     const dialogMarkup = loading ? (
-      <CircularProgress size={200} />
+      <div className={classes.spinnerDiv}>
+        <CircularProgress size={200} thickness={2} />
+      </div>
     ) : (
       <Grid container spacing={16}>
         <Grid item sm={5}>
@@ -101,6 +103,12 @@ class ScreamDialog extends Component {
           </Typography>
           <hr className={classes.invisibleSeperator} />
           <Typography variant="body1">{body}</Typography>
+          <LikeButton screamId={screamId} />
+          <span>{likeCount} likes</span>
+          <MyButton tip="comments">
+            <ChatIcon color="primary" />
+          </MyButton>
+          <span>{commentCount} comments</span>
         </Grid>
       </Grid>
     );
@@ -137,7 +145,7 @@ class ScreamDialog extends Component {
 }
 
 ScreamDialog.propTypes = {
-  getScream: PropTypes.func.isRequired,
+  getOneScream: PropTypes.func.isRequired,
   screamId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   scream: PropTypes.object.isRequired,
